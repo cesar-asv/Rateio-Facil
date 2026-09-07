@@ -1,0 +1,21 @@
+gitignore# === ANGULAR (FRONTEND) ===
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+frontend/.tmp/
+frontend/.sourcemaps/
+
+# === SPRING BOOT (BACKEND) ===
+backend/conta-justa/target/
+backend/conta-justa/.gradle/
+backend/conta-justa/build/
+backend/conta-justa/.idea/
+backend/conta-justa/*.iml
+backend/conta-justa/.classpath
+backend/conta-justa/.project
+backend/conta-justa/.settings/
+
+# === ARQUIVOS DO SISTEMA ===
+.DS_Store
+Thumbs.db
+*.log

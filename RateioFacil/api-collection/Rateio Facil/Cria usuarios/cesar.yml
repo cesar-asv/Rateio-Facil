@@ -1,0 +1,24 @@
+info:
+  name: cesar
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8080/api/usuarios
+  body:
+    type: json
+    data: |2-
+        {
+          "nome": "cesar",
+          "email": "cesar@gmail.com",
+          "senha": "123456"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

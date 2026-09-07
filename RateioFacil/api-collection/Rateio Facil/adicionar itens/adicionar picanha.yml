@@ -1,0 +1,30 @@
+info:
+  name: adicionar picanha
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://localhost:8080/api/contas/1/itens
+  body:
+    type: json
+    data: |+
+      {
+          "descricao": "picanha",
+          "valor": 80.00,
+          "quantidade": 1,
+          "participantesIds": 
+              [
+                1,
+                2
+              ]
+        }
+
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

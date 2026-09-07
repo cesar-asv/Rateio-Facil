@@ -1,0 +1,29 @@
+info:
+  name: adicionar refri
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8080/api/contas/1/itens
+  body:
+    type: json
+    data: |+
+      {
+          "descricao": "refri",
+          "valor": 15.00,
+          "quantidade": 1,
+          "participantesIds": 
+              [
+                3
+              ]
+        }
+
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

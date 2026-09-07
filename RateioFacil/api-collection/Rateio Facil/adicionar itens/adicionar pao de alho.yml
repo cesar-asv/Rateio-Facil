@@ -1,0 +1,31 @@
+info:
+  name: adicionar pao de alho
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://localhost:8080/api/contas/1/itens
+  body:
+    type: json
+    data: |+
+      {
+          "descricao": "pao de alho",
+          "valor": 12.50,
+          "quantidade": 4,
+          "participantesIds": 
+              [
+                1,
+                2,
+                3
+              ]
+        }
+
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

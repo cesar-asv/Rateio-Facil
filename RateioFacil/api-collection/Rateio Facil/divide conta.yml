@@ -1,0 +1,16 @@
+info:
+  name: divide conta
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://localhost:8080/api/contas/1/divisao
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -1,0 +1,7 @@
+info:
+  name: adicionar itens
+  type: folder
+  seq: 6
+
+request:
+  auth: inherit
