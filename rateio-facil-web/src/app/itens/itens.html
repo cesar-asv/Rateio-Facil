@@ -1,0 +1,53 @@
+<h1>Itens da conta</h1>
+
+<div class="card">
+  <p *ngIf="conta"><strong>{{ conta.descricao }}</strong></p>
+
+  <h2>Novo item</h2>
+  <form (ngSubmit)="adicionarItem()">
+    <label>
+      Descrição
+      <input type="text" name="item-descricao" [(ngModel)]="itemForm.descricao" required />
+    </label>
+    <br>
+    <label>
+      Valor (unitário)
+      <input type="number" name="item-valor" [(ngModel)]="itemForm.valor" min="0" step="0.01" required />
+    </label>
+    <br>
+    <label>
+      Quantidade
+      <input type="number" name="item-quantidade" [(ngModel)]="itemForm.quantidade" min="1" step="1" required />
+    </label>
+
+    <h3>Quem divide este item?</h3>
+    <ul>
+      <li *ngFor="let participante of participantes">
+        <label>
+          <input
+            type="checkbox"
+            [checked]="selecaoItem.has(participante.id)"
+            (change)="alternarParticipante(participante.id)"
+          />
+          {{ participante.nome }}
+        </label>
+      </li>
+    </ul>
+
+    <p class="erro">{{ erro }}</p>
+    <button type="submit" [disabled]="carregando">Adicionar item</button>
+  </form>
+</div>
+
+<div class="card">
+  <h2 *ngIf="conta && conta.itens.length > 0">Itens adicionados</h2>
+  <ul *ngIf="conta && conta.itens.length > 0">
+    <li *ngFor="let item of conta.itens">
+      {{ item.descricao }} – {{ item.quantidade }}x {{ formatarMoeda(item.valor) }}
+      = {{ formatarMoeda(item.valorTotal) }}
+      <span class="quem">({{ item.participantes.length }} participantes)</span>
+    </li>
+  </ul>
+
+  <button type="button" (click)="calcularDivisao()">Calcular divisão</button>
+</div>

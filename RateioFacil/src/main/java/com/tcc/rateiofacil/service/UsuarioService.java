@@ -6,6 +6,8 @@ import com.tcc.rateiofacil.dto.UsuarioResponse;
 import com.tcc.rateiofacil.model.Usuario;
 import com.tcc.rateiofacil.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,6 +26,10 @@ public class UsuarioService {
         }
         Usuario usuario = new Usuario(request.getNome(), request.getEmail(), request.getSenha());
         return UsuarioResponse.from(repository.save(usuario));
+    }
+
+    public List<UsuarioResponse> listar() {
+        return repository.findAll().stream().map(UsuarioResponse::from).toList();
     }
 
     public UsuarioResponse autenticar(LoginRequest request) {

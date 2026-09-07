@@ -1,0 +1,13 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+.erro {
+  color: red;
+  min-height: 1.2em;
+}

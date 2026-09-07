@@ -1,0 +1,16 @@
+info:
+  name: get usuarios
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: http://localhost:8080/api/usuarios
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

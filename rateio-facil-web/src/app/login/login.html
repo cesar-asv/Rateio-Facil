@@ -1,0 +1,45 @@
+<h1>Rateio Fácil</h1>
+
+<div class="card">
+  <ng-template [ngIf]="!modoCadastro" [ngIfElse]="cadastro">
+    <h2>Entrar</h2>
+    <form (ngSubmit)="entrar()">
+      <label>
+        Email
+        <input type="email" name="login-email" [(ngModel)]="loginForm.email" required />
+      </label>
+      <label>
+        Senha
+        <input type="password" name="login-senha" [(ngModel)]="loginForm.senha" required />
+      </label>
+      <p class="erro">{{ erro }}</p>
+      <button type="submit" [disabled]="carregando">Entrar</button>
+    </form>
+    <button class="link" type="button" (click)="alterarModo()">Criar novo usuário</button>
+  </ng-template>
+
+  <ng-template #cadastro>
+    <h2>Criar usuário</h2>
+    <form (ngSubmit)="criar()">
+      <label>
+        Nome
+        <input type="text" name="cad-nome" [(ngModel)]="cadastroForm.nome" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="cad-email" [(ngModel)]="cadastroForm.email" required />
+      </label>
+      <label>
+        Senha
+        <input type="password" name="cad-senha" [(ngModel)]="cadastroForm.senha" required />
+      </label>
+      <label>
+        Confirmar senha
+        <input type="password" name="cad-confirmacao" [(ngModel)]="cadastroForm.confirmacao" required />
+      </label>
+      <p class="erro">{{ erro }}</p>
+      <button type="submit" [disabled]="carregando">Criar usuário</button>
+    </form>
+    <button class="link" type="button" (click)="alterarModo()">Já tenho conta</button>
+  </ng-template>
+</div>

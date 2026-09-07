@@ -1,0 +1,34 @@
+<h1>Divisão da conta</h1>
+
+<div class="card">
+  @if (carregando()) {
+    <p>Calculando...</p>
+  }
+
+  @if (erro()) {
+    <p class="erro">{{ erro() }}</p>
+  }
+
+  @if (divisao(); as d) {
+    <p><strong>Total da conta:</strong> {{ formatarMoeda(d.total) }}</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Participante</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of d.rateio; track item.usuarioId) {
+          <tr>
+            <td>{{ item.nome }}</td>
+            <td>{{ formatarMoeda(item.total) }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <button type="button" (click)="novaConta()">Nova conta</button>
+  }
+</div>

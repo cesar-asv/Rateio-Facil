@@ -1,0 +1,29 @@
+<h1>Participantes da conta</h1>
+
+<div class="card">
+  <label>
+    Descrição da conta
+    <input type="text" [(ngModel)]="descricao" placeholder="Ex.: Churrasco" />
+  </label>
+
+  <p *ngIf="carregando">Carregando usuários...</p>
+  <p class="erro" *ngIf="!carregando && usuarios.length === 0 && !erro">
+    Nenhum usuário cadastrado ainda.
+  </p>
+
+  <ul>
+    <li *ngFor="let usuario of usuarios">
+      <label>
+        <input
+          type="checkbox"
+          [checked]="selecionados.has(usuario.id)"
+          (change)="alternar(usuario)"
+        />
+        {{ usuario.nome }} ({{ usuario.email }})
+      </label>
+    </li>
+  </ul>
+
+  <p class="erro">{{ erro }}</p>
+  <button type="button" [disabled]="carregando" (click)="continuar()">Continuar</button>
+</div>
