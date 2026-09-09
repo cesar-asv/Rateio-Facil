@@ -69,7 +69,7 @@ export class LoginComponent {
   private logar(usuario: Usuario) {
     this.state.usuario.set(usuario);
     this.carregando = false;
-    this.router.navigate(['/participantes']);
+    this.router.navigate(['/menu']);
   }
 
   private mensagemErro(err: unknown): string {

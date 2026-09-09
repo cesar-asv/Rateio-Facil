@@ -6,20 +6,28 @@
     <input type="text" [(ngModel)]="descricao" placeholder="Ex.: Churrasco" />
   </label>
 
-  <p *ngIf="carregando">Carregando usuários...</p>
-  <p class="erro" *ngIf="!carregando && usuarios.length === 0 && !erro">
-    Nenhum usuário cadastrado ainda.
+  <h2>Cadastrar participante</h2>
+  <div class="form-cadastro">
+    <input type="text" [(ngModel)]="novoNome" placeholder="Nome" />
+    <input type="email" [(ngModel)]="novoEmail" placeholder="Email" />
+    <button type="button" [disabled]="carregando" (click)="cadastrarParticipante()">Cadastrar</button>
+  </div>
+
+  <h2>Selecionar participantes</h2>
+  <p *ngIf="carregando && participantes.length === 0">Carregando participantes...</p>
+  <p class="erro" *ngIf="!carregando && participantes.length === 0 && !erro">
+    Nenhum participante cadastrado ainda.
   </p>
 
   <ul>
-    <li *ngFor="let usuario of usuarios">
+    <li *ngFor="let participante of participantes">
       <label>
         <input
           type="checkbox"
-          [checked]="selecionados.has(usuario.id)"
-          (change)="alternar(usuario)"
+          [checked]="selecionados.has(participante.id)"
+          (change)="alternar(participante)"
         />
-        {{ usuario.nome }} ({{ usuario.email }})
+        {{ participante.nome }} ({{ participante.email }})
       </label>
     </li>
   </ul>

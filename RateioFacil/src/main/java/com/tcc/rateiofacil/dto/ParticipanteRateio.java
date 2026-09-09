@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 
 public class ParticipanteRateio {
 
-    private Long usuarioId;
+    private Long participanteId;
     private String nome;
     private BigDecimal total;
 
-    public ParticipanteRateio(Long usuarioId, String nome, BigDecimal total) {
-        this.usuarioId = usuarioId;
+    public ParticipanteRateio(Long participanteId, String nome, BigDecimal total) {
+        this.participanteId = participanteId;
         this.nome = nome;
         this.total = total;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Long getParticipanteId() {
+        return participanteId;
     }
 
     public String getNome() {

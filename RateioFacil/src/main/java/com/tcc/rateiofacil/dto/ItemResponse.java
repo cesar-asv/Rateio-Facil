@@ -1,7 +1,6 @@
 package com.tcc.rateiofacil.dto;
 
 import com.tcc.rateiofacil.model.Item;
-import com.tcc.rateiofacil.model.Usuario;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,7 +12,7 @@ public class ItemResponse {
     private BigDecimal valor;
     private Integer quantidade;
     private BigDecimal valorTotal;
-    private List<UsuarioResponse> participantes;
+    private List<ParticipanteResponse> participantes;
 
     public static ItemResponse from(Item item) {
         ItemResponse response = new ItemResponse();
@@ -23,7 +22,7 @@ public class ItemResponse {
         response.quantidade = item.getQuantidade();
         response.valorTotal = item.getValorTotal();
         response.participantes = item.getParticipantes().stream()
-                .map(UsuarioResponse::from)
+                .map(ParticipanteResponse::from)
                 .toList();
         return response;
     }
@@ -48,7 +47,7 @@ public class ItemResponse {
         return valorTotal;
     }
 
-    public List<UsuarioResponse> getParticipantes() {
+    public List<ParticipanteResponse> getParticipantes() {
         return participantes;
     }
 }

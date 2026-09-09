@@ -11,3 +11,13 @@ li {
   color: red;
   min-height: 1.2em;
 }
+
+.form-cadastro {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-cadastro input {
+  flex: 1;
+}

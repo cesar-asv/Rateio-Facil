@@ -37,8 +37,8 @@ public class Item {
     @ManyToMany
     @JoinTable(name = "item_participante",
             joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private Set<Usuario> participantes = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "participante_id"))
+    private Set<Participante> participantes = new HashSet<>();
 
     public Item() {
     }
@@ -84,12 +84,12 @@ public class Item {
         this.conta = conta;
     }
 
-    public Set<Usuario> getParticipantes() {
+    public Set<Participante> getParticipantes() {
         return participantes;
     }
 
-    public void adicionarParticipante(Usuario usuario) {
-        participantes.add(usuario);
+    public void adicionarParticipante(Participante participante) {
+        participantes.add(participante);
     }
 
     public BigDecimal getValorTotal() {

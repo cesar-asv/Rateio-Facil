@@ -4,13 +4,19 @@ export interface Usuario {
   email: string;
 }
 
+export interface Participante {
+  id: number;
+  nome: string;
+  email: string;
+}
+
 export interface Item {
   id: number;
   descricao: string;
   valor: number;
   quantidade: number;
   valorTotal: number;
-  participantes: Usuario[];
+  participantes: Participante[];
 }
 
 export interface Conta {
@@ -28,7 +34,7 @@ export interface Divisao {
 }
 
 export interface ParticipanteRateio {
-  usuarioId: number;
+  participanteId: number;
   nome: string;
   total: number;
 }
@@ -38,4 +44,24 @@ export interface ItemPayload {
   valor: number;
   quantidade: number;
   participantesIds: number[];
+}
+
+export interface HistoricoRateioItem {
+  participanteNome: string;
+  valor: number;
+}
+
+export interface HistoricoItem {
+  descricao: string;
+  valorTotal: number;
+  rateio: HistoricoRateioItem[];
+}
+
+export interface Historico {
+  contaId: number;
+  descricao: string;
+  criadaEm: string;
+  itens: HistoricoItem[];
+  total: number;
+  totalPago: number;
 }

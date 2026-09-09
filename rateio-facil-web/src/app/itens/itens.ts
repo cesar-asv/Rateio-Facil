@@ -43,7 +43,7 @@ export class ItensComponent {
     this.erro = '';
     const conta = this.conta;
     if (!conta) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/menu']);
       return;
     }
     if (!this.itemForm.descricao.trim()) {
@@ -87,7 +87,7 @@ export class ItensComponent {
   calcularDivisao() {
     const conta = this.conta;
     if (!conta) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/menu']);
       return;
     }
     if (conta.itens.length === 0) {

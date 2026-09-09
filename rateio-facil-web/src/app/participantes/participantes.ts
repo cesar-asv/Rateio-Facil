@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { RateioStateService } from '../rateio-state.service';
-import { Usuario } from '../interfaces';
+import { Participante } from '../interfaces';
 
 @Component({
   selector: 'app-participantes',
@@ -17,35 +17,61 @@ export class ParticipantesComponent implements OnInit {
   private readonly state = inject(RateioStateService);
   private readonly router = inject(Router);
 
-  usuarios: Usuario[] = [];
+  participantes: Participante[] = [];
   carregando = false;
   erro = '';
   descricao = '';
   selecionados: Set<number> = new Set();
 
+  novoNome = '';
+  novoEmail = '';
+
   ngOnInit(): void {
-    this.carregarUsuarios();
+    this.carregarParticipantes();
   }
 
-  carregarUsuarios() {
+  carregarParticipantes() {
     this.carregando = true;
-    this.api.listarUsuarios().subscribe({
-      next: (usuarios) => {
-        this.usuarios = usuarios;
+    this.api.listarParticipantes().subscribe({
+      next: (participantes) => {
+        this.participantes = participantes;
         this.carregando = false;
       },
       error: (err) => {
         this.carregando = false;
-        this.erro = 'Não foi possível listar os usuários.';
+        this.erro = 'Não foi possível listar os participantes.';
       },
     });
   }
 
-  alternar(usuario: Usuario) {
-    if (this.selecionados.has(usuario.id)) {
-      this.selecionados.delete(usuario.id);
+  cadastrarParticipante() {
+    this.erro = '';
+    if (!this.novoNome.trim() || !this.novoEmail.trim()) {
+      this.erro = 'Informe nome e email do participante.';
+      return;
+    }
+    this.carregando = true;
+    this.api
+      .criarParticipante({ nome: this.novoNome.trim(), email: this.novoEmail.trim() })
+      .subscribe({
+        next: (participante) => {
+          this.participantes = [...this.participantes, participante];
+          this.novoNome = '';
+          this.novoEmail = '';
+          this.carregando = false;
+        },
+        error: (err) => {
+          this.carregando = false;
+          this.erro = 'Não foi possível cadastrar o participante.';
+        },
+      });
+  }
+
+  alternar(participante: Participante) {
+    if (this.selecionados.has(participante.id)) {
+      this.selecionados.delete(participante.id);
     } else {
-      this.selecionados.add(usuario.id);
+      this.selecionados.add(participante.id);
     }
   }
 
@@ -59,11 +85,12 @@ export class ParticipantesComponent implements OnInit {
       this.erro = 'Selecione ao menos um participante.';
       return;
     }
-    const participantes = this.usuarios.filter((u) => this.selecionados.has(u.id));
-    this.state.participantes.set(participantes);
+    const selecionados = this.participantes.filter((p) => this.selecionados.has(p.id));
+    this.state.participantes.set(selecionados);
     const dono = this.state.usuario();
     if (!dono) {
-      this.router.navigate(['/']);
+      console.log('if !dono');
+      this.router.navigate(['/menu']);
       return;
     }
     this.carregando = true;

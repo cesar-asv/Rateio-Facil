@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (item of d.rateio; track item.usuarioId) {
+        @for (item of d.rateio; track item.participanteId) {
           <tr>
             <td>{{ item.nome }}</td>
             <td>{{ formatarMoeda(item.total) }}</td>

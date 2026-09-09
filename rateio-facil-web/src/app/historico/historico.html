@@ -1,0 +1,88 @@
+<h1>Histórico de Participantes</h1>
+
+<div class="card">
+  @if (!participanteSelecionado()) {
+    <h2>Buscar participante</h2>
+    <div class="busca">
+      <input type="text" [(ngModel)]="buscaNome" placeholder="Nome" />
+      <input type="email" [(ngModel)]="buscaEmail" placeholder="Email" />
+      <button type="button" [disabled]="carregando()" (click)="buscar()">Buscar</button>
+    </div>
+
+    @if (carregando() && participantes().length === 0) {
+      <p>Buscando...</p>
+    }
+
+    @if (!carregando() && participantes().length === 0 && buscaRealizada() && !erro()) {
+      <p class="erro">Nenhum participante encontrado.</p>
+    }
+
+    @for (p of participantes(); track p.id) {
+      <div class="participante-item">
+        <button type="button" class="link" (click)="selecionar(p)">
+          {{ p.nome }} ({{ p.email }})
+        </button>
+      </div>
+    }
+  } @else {
+    <div class="voltar">
+      <button type="button" class="link" (click)="voltar()">Voltar a busca</button>
+    </div>
+
+    <h2>{{ participanteSelecionado()!.nome }}</h2>
+
+    @if (carregando()) {
+      <p>Carregando histórico...</p>
+    }
+
+    @if (!carregando() && historico().length === 0 && !erro()) {
+      <p>Nenhum rateio encontrado para este participante.</p>
+    }
+
+    @for (conta of historico(); track conta.contaId) {
+      <div class="conta-bloco">
+        <div class="cabecalho">
+          <h3>
+            {{ conta.descricao }}
+            <span class="data">{{ formatarData(conta.criadaEm) }}</span>
+          </h3>
+          <p class="total-rateio">Total: {{ formatarMoeda(conta.total) }}</p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Itens</th>
+              <th>Rateio do item</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of conta.itens; track item.descricao) {
+              <tr>
+                <td>{{ item.descricao }}</td>
+                <td>{{ formatarMoeda(item.valorTotal) }}</td>
+                <td>
+                  @for (r of item.rateio; track r.participanteNome; let last = $last) {
+                    {{ r.participanteNome }}: {{ formatarMoeda(r.valor) }}@if (!last) {, }
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+          <tfoot>
+            <tr class="pagou">
+              <td colspan="2">Pagou pelo rateio:</td>
+              <td class="valor-pagou">{{ formatarMoeda(conta.totalPago) }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    }
+  }
+
+  @if (erro()) {
+    <p class="erro">{{ erro() }}</p>
+  }
+  <button type="button" (click)="voltarMenu()">Voltar ao menu</button>
+</div>

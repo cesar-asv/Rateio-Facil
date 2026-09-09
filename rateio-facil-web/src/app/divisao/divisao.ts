@@ -26,7 +26,7 @@ export class DivisaoComponent implements OnInit {
   carregar() {
     const conta = this.state.conta();
     if (!conta) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/menu']);
       return;
     }
     this.carregando.set(true);
@@ -45,7 +45,7 @@ export class DivisaoComponent implements OnInit {
 
   novaConta() {
     this.state.reiniciar();
-    this.router.navigate(['/']);
+    this.router.navigate(['/participantes']);
   }
 
   formatarMoeda(valor: number): string {

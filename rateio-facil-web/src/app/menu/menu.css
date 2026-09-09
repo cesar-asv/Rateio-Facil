@@ -1,0 +1,30 @@
+/* .saudacao {
+  font-size: 1.2em;
+  margin-bottom: 24px;
+} */
+
+.opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.opcoes button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+}
+
+.sair {
+  width: 100%;
+  background: none;
+  border: 1px solid #999;
+  color: #666;
+  cursor: pointer;
+}
+
+.sair:hover {
+  border-color: #333;
+  color: #333;
+}
